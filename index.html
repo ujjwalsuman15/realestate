@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="Modern real estate landing page — find homes, browse listings, contact agents." />
+  <meta name="keywords" content="real estate, homes for sale, property listings, apartments, houses" />
+  <title>Real Estate — Find Your Next Home</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --accent:#2563eb; /* blue */
+      --muted:#6b7280;
+      --bg:#f8fafc;
+      --card:#ffffff;
+      --radius:12px;
+      font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--bg);color:#0f172a;line-height:1.45}
+    .container{max-width:1100px;margin:0 auto;padding:28px}
+
+    /* Header */
+    header{display:flex;justify-content:space-between;align-items:center;padding:18px 0}
+    .logo{display:flex;gap:10px;align-items:center;font-weight:700}
+    .nav a{margin-left:18px;color:var(--muted);text-decoration:none}
+    .cta{background:var(--accent);color:#fff;padding:10px 14px;border-radius:8px;text-decoration:none}
+
+    /* Hero */
+    .hero{display:grid;grid-template-columns:1fr 420px;gap:28px;align-items:center;margin-top:28px}
+    .hero-left h1{font-size:2.2rem;margin:0 0 12px}
+    .hero-left p{color:var(--muted);margin:0 0 20px}
+    .search{background:var(--card);padding:14px;border-radius:12px;box-shadow:0 6px 18px rgba(2,6,23,0.06)}
+    .search input, .search select{width:100%;padding:10px;border-radius:8px;border:1px solid #e6eef8;margin-bottom:10px}
+    .search .row{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+    .hero-right{background-image:url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1400&q=60');background-size:cover;background-position:center;border-radius:12px;height:320px;box-shadow:0 8px 26px rgba(2,6,23,0.12)}
+
+    /* Listings */
+    h2{margin:36px 0 14px}
+    .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px}
+    .card{background:var(--card);padding:12px;border-radius:10px;box-shadow:0 6px 18px rgba(2,6,23,0.05);overflow:hidden}
+    .card img{width:100%;height:140px;object-fit:cover;border-radius:8px}
+    .price{font-weight:700;color:var(--accent);margin-top:8px}
+    .meta{color:var(--muted);font-size:0.9rem;margin-top:6px}
+    .card .btn{display:inline-block;margin-top:10px;padding:8px 12px;background:#eef2ff;color:var(--accent);border-radius:8px;text-decoration:none}
+
+    /* About + Contact */
+    .split{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:20px}
+    .contact form{display:grid;gap:8px}
+    .contact input, .contact textarea{padding:10px;border-radius:8px;border:1px solid #e6eef8}
+    .contact button{background:var(--accent);color:white;padding:10px;border-radius:8px;border:0}
+
+    footer{margin-top:36px;color:var(--muted);font-size:0.9rem;padding:20px 0;border-top:1px solid #e6eef8}
+
+    /* Responsive */
+    @media (max-width:900px){
+      .hero{grid-template-columns:1fr;}
+      .hero-right{height:220px}
+      .split{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="logo">
+        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden><rect width="24" height="24" rx="6" fill="var(--accent)"/><path d="M7 13l3-3 3 3 4-4" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span>RealEstate</span>
+      </div>
+      <nav class="nav">
+        <a href="#listings">Listings</a>
+        <a href="#how">How it Works</a>
+        <a href="#contact" class="cta">Contact Agent</a>
+      </nav>
+    </header>
+
+    <section class="hero">
+      <div class="hero-left">
+        <h1>Find the perfect home for you</h1>
+        <p>Search verified listings, explore neighborhoods, and connect with trusted agents to buy or rent your next home.</p>
+
+        <div class="search" aria-label="property search">
+          <label for="q" style="font-weight:600">Search by city or ZIP</label>
+          <input id="q" type="search" placeholder="e.g., San Francisco, 94103" />
+          <div class="row">
+            <select id="type">
+              <option value="any">Any type</option>
+              <option value="house">House</option>
+              <option value="apartment">Apartment</option>
+              <option value="condo">Condo</option>
+            </select>
+            <select id="price">
+              <option value="0">Any price</option>
+              <option value="0-300000">Under $300k</option>
+              <option value="300000-700000">$300k–$700k</option>
+              <option value="700000+">$700k+</option>
+            </select>
+          </div>
+          <button onclick="searchListings()" style="margin-top:8px;padding:10px 14px;background:var(--accent);color:white;border-radius:8px;border:0">Search</button>
+        </div>
+      </div>
+
+      <div class="hero-right" role="img" aria-label="modern home exterior"></div>
+    </section>
+
+    <h2 id="listings">Featured Listings</h2>
+    <div class="grid" id="listGrid">
+      <!-- sample cards -->
+      <article class="card" data-type="house" data-price="850000">
+        <img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=1000&q=60" alt="House with modern facade"/>
+        <div class="price">$850,000</div>
+        <div class="meta">4 bed • 3 bath • 2,800 sqft</div>
+        <a class="btn" href="#">View details</a>
+      </article>
+
+      <article class="card" data-type="apartment" data-price="420000">
+        <img src="https://images.unsplash.com/photo-1572120360610-d971b9f0b2c1?auto=format&fit=crop&w=1000&q=60" alt="Modern apartment interior"/>
+        <div class="price">$420,000</div>
+        <div class="meta">2 bed • 2 bath • 1,100 sqft</div>
+        <a class="btn" href="#">View details</a>
+      </article>
+
+      <article class="card" data-type="condo" data-price="620000">
+        <img src="https://images.unsplash.com/photo-1560448073-4d9f0d6b5f12?auto=format&fit=crop&w=1000&q=60" alt="Condo living room"/>
+        <div class="price">$620,000</div>
+        <div class="meta">3 bed • 2 bath • 1,600 sqft</div>
+        <a class="btn" href="#">View details</a>
+      </article>
+
+      <article class="card" data-type="house" data-price="1295000">
+        <img src="https://images.unsplash.com/photo-1600585154242-5c4eab1ddf66?auto=format&fit=crop&w=1000&q=60" alt="Luxury home backyard"/>
+        <div class="price">$1,295,000</div>
+        <div class="meta">5 bed • 4 bath • 4,200 sqft</div>
+        <a class="btn" href="#">View details</a>
+      </article>
+    </div>
+
+    <section id="how">
+      <h2>How it works</h2>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-top:12px">
+        <div class="card"><strong>Search listings</strong><p class="meta">Filter by neighborhood, type, and price.</p></div>
+        <div class="card"><strong>Book viewings</strong><p class="meta">Schedule tours with local agents.</p></div>
+        <div class="card"><strong>Buy or rent</strong><p class="meta">Get help with offers, inspections, and closing.</p></div>
+      </div>
+    </section>
+
+    <div class="split">
+      <section class="about">
+        <h2>About RealEstate</h2>
+        <p class="meta">We connect buyers and renters with verified listings and experienced agents. Whether you're searching for your first home or your next investment, we're here to help with neighborhood insights and an easy process.</p>
+      </section>
+
+      <section id="contact" class="contact">
+        <h2>Contact an agent</h2>
+        <form id="contactForm" onsubmit="submitForm(event)">
+          <input type="text" id="name" placeholder="Your name" required />
+          <input type="email" id="email" placeholder="Email" required />
+          <input type="tel" id="phone" placeholder="Phone (optional)" />
+          <textarea id="message" rows="4" placeholder="Tell us what you're looking for..." required></textarea>
+          <button type="submit">Send message</button>
+        </form>
+      </section>
+    </div>
+
+    <footer>
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
+        <div>© <strong>RealEstate</strong> — All rights reserved</div>
+        <div style="color:var(--muted)">Built with care • <a href="#">Privacy</a></div>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    function searchListings(){
+      const q = document.getElementById('q').value.toLowerCase();
+      const type = document.getElementById('type').value;
+      const list = Array.from(document.querySelectorAll('#listGrid .card'));
+      list.forEach(card => {
+        const txt = card.textContent.toLowerCase();
+        const matchesQuery = !q || txt.includes(q);
+        const matchesType = (type === 'any') || card.dataset.type === type;
+        card.style.display = (matchesQuery && matchesType) ? '' : 'none';
+      });
+    }
+
+    function submitForm(e){
+      e.preventDefault();
+      // Simple client-side validation + placeholder submit
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const msg = document.getElementById('message').value.trim();
+      if(!name || !email || !msg){
+        alert('Please fill the required fields.');
+        return;
+      }
+      // In a real site you'd POST to your backend. For now, show a confirmation.
+      alert('Thanks, ' + name + '! Your message has been sent. We will reach out shortly.');
+      document.getElementById('contactForm').reset();
+    }
+  </script>
+</body>
+</html>
